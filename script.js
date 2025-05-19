@@ -1,88 +1,69 @@
 var Crust  = L.marker([42.65244897157923, 21.17176212807544]).bindPopup('Ketu eshte Pizza Crust.'),
     Napoli = L.marker([42.653479732786735, 21.16771501628135]).bindPopup('Ketu eshte Napoli Pizza.'),
     Yana   = L.marker([42.66308122788367, 21.16153853530947]).bindPopup('Ketu eshte Yana Napolitana.'),
-    Ruds   = L.marker([42.66050732833732, 21.161825886478464]).bindPopup('Ketu eshte Ruds Pizza.');
+    Ruds   = L.marker([42.66050732833732, 21.161825886478464]).bindPopup('Ketu eshte Ruds Pizza.'),
     Sos    = L.marker([42.651026823391724, 21.168499103734533]).bindPopup('Ketu eshte Sos Pizza.');
 
-    var cities = L.layerGroup([Crust, Napoli, Yana, Ruds, Sos]);
+var pizza = L.layerGroup([Crust, Napoli, Yana, Ruds, Sos]);
 
-    var osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        attribution: '© OpenStreetMap'
-    });
-    
-    var osmHOT = L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        attribution: '© OpenStreetMap contributors, Tiles style by Humanitarian OpenStreetMap Team hosted by OpenStreetMap France'});
-    
-        var map = L.map('map', {
-            center: [42.667332, 21.164184],
-            zoom: 10,
-            layers: [osm, cities]
-        });
+// hamburger
+var Aba = L.marker([42.6495931071088, 21.157716800469704]).bindPopup('Ketu eshte Hamburger Aba.'),
+    routeKalabria = L.marker([42.64530452935157, 21.155673527375953]).bindPopup('Ketu eshte Route 66 (Kalabria).');
+    route66 = L.marker([42.64846796734142, 21.16848153027561]).bindPopup('Ketu eshte Route 66.');
+ buffalo = L.marker([42.66121376069884, 21.16092697354637]).bindPopup('Ketu eshte Buffalo.');
+smash = L.marker([42.65757062695122, 21.151709027685673]).bindPopup('Ketu eshte Smash Burger.');
+shaban = L.marker([42.66328284322778, 21.163768238683343]).bindPopup('Ketu eshte Shaban Grill House.');
+hebs = L.marker([42.6501059219779, 21.174256387127027]).bindPopup('Ketu eshte Hebs.');
 
-        var baseMaps = {
-            "OpenStreetMap": osm,
-            "OpenStreetMap.HOT": osmHOT
-        };
-        
-        var overlayMaps = {
-            "Pizza": cities
-        };
+var hamburger = L.layerGroup([Aba, routeKalabria, route66, buffalo , smash, shaban, hebs]);
 
-        var layerControl = L.control.layers(baseMaps, overlayMaps).addTo(map);
+// Italian restaurants
+var MammaMia = L.marker([42.65333057210587, 21.16757118455793]).bindPopup('Ketu eshte Napoli.'),
+    BellaItalia = L.marker([42.6580731391406, 21.166656956444875]).bindPopup('Ketu eshte Tabana Restaurant.');
+sette = L.marker([42.6580731391406, 21.166656956444875]).bindPopup('Ketu eshte SETTE-Ristorante Italiano.');
+ponte = L.marker([42.66434685415317, 21.15938891553721]).bindPopup('Ketu eshte Ponte Vecchio.');
+la = L.marker([42.656035778513825, 21.175143053395796]).bindPopup('Ketu eshte La Napoletana.');
 
-        var baseMaps = {
-            "OpenStreetMap": osm,
-            "<span style='color: red'>OpenStreetMap.HOT</span>": osmHOT
-        };
+var italian = L.layerGroup([MammaMia, BellaItalia, sette, ponte, la]);
 
-        var crownHill = L.marker([42.662201628299336, 21.168809471278458]).bindPopup('This is Parku i Qytetit.'),
-    rubyHill = L.marker([42.67543245693771, 21.211067145369682]).bindPopup('This is Parku i Germise.');
-    
-var parks = L.layerGroup([crownHill, rubyHill]);
+// Greek restaurants
+var AthensGrill = L.marker([42.654000, 21.166000]).bindPopup('Ketu eshte Athens Grill.'),
+    SantoriniTaverna = L.marker([42.659000, 21.162000]).bindPopup('Ketu eshte Santorini Taverna.');
+
+var greek = L.layerGroup([AthensGrill, SantoriniTaverna]);
+
+var osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '© OpenStreetMap'
+});
+
+var osmHOT = L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '© OpenStreetMap contributors, Tiles style by Humanitarian OpenStreetMap Team hosted by OpenStreetMap France'
+});
+
 var openTopoMap = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
     attribution: 'Map data: © OpenStreetMap contributors, SRTM | Map style: © OpenTopoMap (CC-BY-SA)'
 });
 
-layerControl.addBaseLayer(openTopoMap, "OpenTopoMap");
-layerControl.addOverlay(parks, "Hamburger");var littleton = L.marker([42.65243020394924, 21.171770102331546]).bindPopup('This is Albi Mall.'),
-    denver    = L.marker([42.653479732786735, 21.16771501628135]).bindPopup('This is Prishtina Mall.'),
-    aurora    = L.marker([42.65662848419542, 21.160342895463245]).bindPopup('This is Katedralja Nene Tereza.'),
-    golden    = L.marker([42.659574, 21.160663]).bindPopup('This is Sheshi Zahir Pajaziti.');
+var map = L.map('map', {
+    center: [42.655140842634545, 21.16398715139936],
+    zoom: 14,
+    layers: [osm, pizza]
+});
 
-    var cities = L.layerGroup([littleton, denver, aurora, golden]);
+var baseMaps = {
+    "OpenStreetMap": osm,
+    "OpenStreetMap.HOT": osmHOT,
+    "OpenTopoMap": openTopoMap
+};
 
-    var osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        attribution: '© OpenStreetMap'
-    });
-    
-    var osmHOT = L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        attribution: '© OpenStreetMap contributors, Tiles style by Humanitarian OpenStreetMap Team hosted by OpenStreetMap France'});
-    
-        var map = L.map('map', {
-            center: [42.667332, 21.164184],
-            zoom: 10,
-            layers: [osm, cities]
-        });
+var overlayMaps = {
+    "Pizza": pizza,
+    "Hamburger": hamburger,
+    "Italian": italian,
+    "Greek": greek
+};
 
-        var baseMaps = {
-            "OpenStreetMap": osm,
-            "OpenStreetMap.HOT": osmHOT
-        };
-        
-        var overlayMaps = {
-            "Cities": cities
-        };
-
-        var layerControl = L.control.layers(baseMaps, overlayMaps).addTo(map);
-
-        var baseMaps = {
-            "OpenStreetMap": osm,
-            "<span style='color: red'>OpenStreetMap.HOT</span>": osmHOT
-        };
-
-      
+var layerControl = L.control.layers(baseMaps, overlayMaps).addTo(map);
