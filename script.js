@@ -8,8 +8,8 @@ var Crust = L.marker([42.65244897157923, 21.17176212807544]).bindPopup('Ketu esh
 var pizza = L.layerGroup([Crust, Napoli, Jana, Ruds, Sos]);
 
 // Hamburger
-var Aba = L.marker([42.6495931071088, 21.157716800469704]).bindPopup('Ketu eshte Hamburger Aba.'),
-    routeKalabria = L.marker([42.64530452935157, 21.155673527375953]).bindPopup('Ketu eshte Route 66 (Kalabria).'),
+var Aba = L.marker([42.6495931071088, 21.157716800469704]).bindPopup('Ketu eshte Hamburger Aba <br> Vleresimet 4.8 - 5 yje <br> Jona Bujari thot E thjeshte dhe e shijshme!!! Një nga hamburgerët më të mirë që kam pasur ndonjëherë. Të dy vendet janë shumë të pastra dhe stafi është shumë miqësor! Duhet ta provoni patjetër nëse jeni në Prishtinë!.'),
+    routeKalabria = L.marker([42.64530452935157, 21.155673527375953]).bindPopup('Ketu eshte Route 66 (Kalabria) <br> Vleresimet 5 - 5 yje <br> Labinot Lahu thot Ushqimi ishte absolutisht i shijshëm, plot shije dhe i prezantuar bukur. Pijet ishin bërë në mënyrë perfekte, freskuese dhe unike. Vetë vendi ka një atmosferë të mahnitshme - komod, elegant dhe mikpritës.'),
     route66 = L.marker([42.64846796734142, 21.16848153027561]).bindPopup('Ketu eshte Route 66.'),
     buffalo = L.marker([42.66121376069884, 21.16092697354637]).bindPopup('Ketu eshte Buffalo.'),
     smash = L.marker([42.65757062695122, 21.151709027685673]).bindPopup('Ketu eshte Smash Burger.'),
@@ -49,7 +49,7 @@ var mexicana = L.marker([42.661204234436234, 21.160461695577766]).bindPopup('Ket
     comandante = L.marker([42.65842667177384, 21.14750149111432]).bindPopup('Ketu eshte Comandante Marcos <br> Vleresimet 4.4 - 5 yje <br> Florian Gashi Comandante Marcos ofron kuzhinë të jashtëzakonshme meksikane me shije të pasura, autentike dhe një atmosferë të gjallë.'),
     mucho = L.marker([42.661950873905205, 21.160258050636724]).bindPopup('Ketu eshte Eat Mucho <br> Vleresimet 4.2 - 5 yje <br> Durim Bujupi Ushqimi më i mirë meksikan në Prishtinë.Gjithmonë shërbim i mirë dhe ushqim i mirë me kombinime unike.');
 
-var mexican = L.layerGroup([albanezi, comandante, shpija]);
+var mexican = L.layerGroup([mexicana, comandante, mucho]);
 
 
 // Map layers
@@ -88,5 +88,53 @@ var overlayMaps = {
     "Tradicionale": traditional,
     "Meksikane": mexican,
 };
+
+ // placeholders
+var current_position, current_accuracy;
+var currentLatLng = null; // ky e ruan poziten aktuale
+
+function onLocationFound(e) {
+    // nese ka pozicion ekzistues, e hek
+    if (current_position) {
+        map.removeLayer(current_position);
+        map.removeLayer(current_accuracy);
+    }
+
+    var radius = e.accuracy / 2;
+
+    current_position = L.marker(e.latlng).addTo(map)
+        .bindPopup("Ti je ne kete pjes " + radius + " metra prej pikes").openPopup();
+
+    current_accuracy = L.circle(e.latlng, radius).addTo(map);
+
+    currentLatLng = e.latlng; // ruajme latlng ketu
+
+    // nese routing s'eshte ba hala
+    if (!window.routePlotted) {
+        L.Routing.control({
+            waypoints: [
+                currentLatLng,
+                L.latLng(42.65333057210587, 21.16757118455793) // destinacioni (p.sh. Mamma Mia)
+            ]
+        }).addTo(map);
+
+        window.routePlotted = true; // vendos flag me mos me kriju 100 route controllers
+    }
+}
+
+function onLocationError(e) {
+    alert(e.message);
+}
+
+map.on('locationfound', onLocationFound);
+map.on('locationerror', onLocationError);
+
+// funksioni locate
+function locate() {
+    map.locate({ setView: true, maxZoom: 16 });
+}
+
+// thirre locate qdo 3 sekonda
+setInterval(locate, 9000);
 
 var layerControl = L.control.layers(baseMaps, overlayMaps).addTo(map);
