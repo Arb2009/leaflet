@@ -89,52 +89,6 @@ var overlayMaps = {
     "Meksikane": mexican,
 };
 
- // placeholders
-var current_position, current_accuracy;
-var currentLatLng = null; // ky e ruan poziten aktuale
-
-function onLocationFound(e) {
-    // nese ka pozicion ekzistues, e hek
-    if (current_position) {
-        map.removeLayer(current_position);
-        map.removeLayer(current_accuracy);
-    }
-
-    var radius = e.accuracy / 2;
-
-    current_position = L.marker(e.latlng).addTo(map)
-        .bindPopup("Ti je ne kete pjes " + radius + " metra prej pikes").openPopup();
-
-    current_accuracy = L.circle(e.latlng, radius).addTo(map);
-
-    currentLatLng = e.latlng; // ruajme latlng ketu
-
-    // nese routing s'eshte ba hala
-    if (!window.routePlotted) {
-        L.Routing.control({
-            waypoints: [
-                currentLatLng,
-                L.latLng(42.65333057210587, 21.16757118455793) // destinacioni (p.sh. Mamma Mia)
-            ]
-        }).addTo(map);
-
-        window.routePlotted = true; // vendos flag me mos me kriju 100 route controllers
-    }
-}
-
-function onLocationError(e) {
-    alert(e.message);
-}
-
-map.on('locationfound', onLocationFound);
-map.on('locationerror', onLocationError);
-
-// funksioni locate
-function locate() {
-    map.locate({ setView: true, maxZoom: 16 });
-}
-
-// thirre locate qdo 3 sekonda
-setInterval(locate, 9000);
+ 
 
 var layerControl = L.control.layers(baseMaps, overlayMaps).addTo(map);
