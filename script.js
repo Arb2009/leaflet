@@ -10,29 +10,28 @@ var pizza = L.layerGroup([Crust, Napoli, Jana, Ruds, Sos]);
 // Hamburger
 var Aba = L.marker([42.6495931071088, 21.157716800469704]).bindPopup('Ketu eshte Hamburger Aba <br> Vleresimet 4.8 - 5 yje <br> Jona Bujari thot E thjeshte dhe e shijshme!!! Një nga hamburgerët më të mirë që kam pasur ndonjëherë. Të dy vendet janë shumë të pastra dhe stafi është shumë miqësor! Duhet ta provoni patjetër nëse jeni në Prishtinë!.'),
     routeKalabria = L.marker([42.64530452935157, 21.155673527375953]).bindPopup('Ketu eshte Route 66 (Kalabria) <br> Vleresimet 5 - 5 yje <br> Labinot Lahu thot Ushqimi ishte absolutisht i shijshëm, plot shije dhe i prezantuar bukur. Pijet ishin bërë në mënyrë perfekte, freskuese dhe unike. Vetë vendi ka një atmosferë të mahnitshme - komod, elegant dhe mikpritës.'),
-    route66 = L.marker([42.64846796734142, 21.16848153027561]).bindPopup('Ketu eshte Route 66.'),
-    buffalo = L.marker([42.66121376069884, 21.16092697354637]).bindPopup('Ketu eshte Buffalo.'),
-    smash = L.marker([42.65757062695122, 21.151709027685673]).bindPopup('Ketu eshte Smash Burger.'),
-    shaban = L.marker([42.66328284322778, 21.163768238683343]).bindPopup('Ketu eshte Shaban Grill House.'),
-    hebs = L.marker([42.6501059219779, 21.174256387127027]).bindPopup('Ketu eshte Hebs.');
+    route66 = L.marker([42.64846796734142, 21.16848153027561]).bindPopup('Ketu eshte Route 66 <br> Vleresimet 4.2 -5 yje <br> Anisa Ismajli thot E duaaaaa nuk ka asnjë koment që mund të përshkruajë sa e mirë ishte kjo përvojë.'),
+    buffalo = L.marker([42.66121376069884, 21.16092697354637]).bindPopup('Ketu eshte Buffalo <br> Vleresimet 4.0 - 5 yje <br> Vlera S thot Burgerët më të mirë në qytet! I preferuari im është ai klasik amerikan! Gjithashtu serverët ishin super të bukur💕.'),
+    smash = L.marker([42.65757062695122, 21.151709027685673]).bindPopup('Ketu eshte Smash Burger <br> Vleresimet 4.8 - 5 yje <br> Drenik Sadiku thot Burger dhe patate të skuqura ishin mjaft të mira, të kalitura dhe të gatuara në perfeksion. Shërbimi ishte shumë, pasi është ende një vend i ri, supozoj se punonjësit po mësohen me menunë e tyre të vogël dhe me përbërësit dhe salcat.'),
+    shaban = L.marker([42.66328284322778, 21.163768238683343]).bindPopup('Ketu eshte Shaban Grill House <br> Vleresimet 4.5 - 5 yje <br> Genc Demjaha thot punëtorët janë vërtet të këndshëm dhe mishi ishte i mrekullueshëm. shërbimi ishte vërtet i shpejtë. një opsion vërtet i mirë për darkë.'),
+    hebs = L.marker([42.6501059219779, 21.174256387127027]).bindPopup('Ketu eshte Hebs <br> Vleresimet 4.0 - 5 yje <br> Besian Beci thot Nese doni me u ngi me ushqim shko n hebs e kom ni eksperienc shume tmire me hebsin, ushqimi ka kualitet shum t lart porosia delivery vjen shum shpejt edhe asniher ushqimi sosht i ftoft.');
 
 var hamburger = L.layerGroup([Aba, routeKalabria, route66, buffalo, smash, shaban, hebs]);
 
 // Italian
-var MammaMia = L.marker([42.65333057210587, 21.16757118455793]).bindPopup('Ketu eshte Napoli.'),
-    BellaItalia = L.marker([42.6580731391406, 21.166656956444875]).bindPopup('Ketu eshte Tabana Restaurant.'),
-    sette = L.marker([42.6580731391406, 21.166656956444875]).bindPopup('Ketu eshte SETTE-Ristorante Italiano.'),
-    ponte = L.marker([42.66434685415317, 21.15938891553721]).bindPopup('Ketu eshte Ponte Vecchio.'),
-    la = L.marker([42.656035778513825, 21.175143053395796]).bindPopup('Ketu eshte La Napoletana.'),
-    trattoria = L.marker([42.64850207720944, 21.171007998102567]).bindPopup('Ketu eshte Restaurant Trattoria.'),
-    vapiano = L.marker([42.658653731872185, 21.15500649763883]).bindPopup('Ketu eshte Vapiano.');
+var MammaMia = L.marker([42.65333057210587, 21.16757118455793]).bindPopup('Ketu eshte Napoli <br> Vleresimet 4.5 - 5 yje <br> Anyle Zogu thot Shërbim i shpejtë dhe efikas, ambient komod dhe i rehatshëm, ushqim i mirë dhe çmime shumë të arsyeshme. Do ta rekomandoja për çdo udhëtar në Kosovë.'),
+    sette = L.marker([42.6580731391406, 21.166656956444875]).bindPopup('Ketu eshte SETTE-Ristorante Italiano <br> Vleresimet 4.7 - 5 yje <br> Era Ahmeti thot Ushqim, ambient dhe shërbim i mrekullueshëm. Një nga restorantet më të mira italiane në Prishtinë.'),
+    ponte = L.marker([42.66434685415317, 21.15938891553721]).bindPopup('Ketu eshte Ponte Vecchio <br> Vleresimet 4.7 - 5 yje <br> Blerta Haxha thot Restoranti më komod familjar në qytet. Ushqimi është aq i shijshëm dhe jo shumë i shtrenjtë. Provoni lasagna, makarona ponte (e preferuara ime) dhe tiramisu.'),
+    la = L.marker([42.656035778513825, 21.175143053395796]).bindPopup('Ketu eshte La Napoletana <br> Vleresimet 4.7 - 5 yje <br> Kaltrina Zylfiu thot Home Pica bën pica vërtet të mira në stilin Napoletana! Korja është e lehtë dhe krokante, dhe mbushjet shijojnë super të freskët. Më pëlqeu veçanërisht vaji pikant - ai i shtoi picës vetëm goditjen e duhur.'),
+    trattoria = L.marker([42.64850207720944, 21.171007998102567]).bindPopup('Ketu eshte Restaurant Trattoria <br> Vleresimet 4.6 - 5 yje <br> Arben Mehani thot Kalova një kohë të mrekullueshme në Trattoria! Bifteku i viçit ishte absolutisht i shijshëm - i butë, i shijshëm dhe i gatuar në përsosmëri. Një atmosferë komode dhe staf miqësor.'),
+    vapiano = L.marker([42.658653731872185, 21.15500649763883]).bindPopup('Ketu eshte Vapiano <br> Vleresimet 4.5 - 5 yje <br> Nora Uka thot  Ushqimi ishte absolutisht i lezetshëm, me përbërës të freskët dhe shije të pasura që e bënin çdo pjatë një kënaqësi të kuzhinës. Nga makaronat e gatuara në mënyrë perfekte deri te sallatat e shijshme të freskëta.');
 
-var italian = L.layerGroup([MammaMia, BellaItalia, sette, ponte, la, trattoria, vapiano]);
+var italian = L.layerGroup([MammaMia, sette, ponte, la, trattoria, vapiano]);
 
 // Greek
 var trock = L.marker([42.66184666155505, 21.154231161087417]).bindPopup('Ketu eshte Trock Taverna.'),
     baba = L.marker([42.65936927110693, 21.159702867145086]).bindPopup('Ketu eshte Baba Ganoush Meze.'),
-    gagi = L.marker([42.6635813816616, 21.162249957004892]).bindPopup('Ketu eshte Gagi Restaurant <br> Rating.');
+    gagi = L.marker([42.6635813816616, 21.162249957004892]).bindPopup('Ketu eshte Gagi Restaurant <br> .');
 
 var greek = L.layerGroup([trock, baba, gagi]);
 
