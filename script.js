@@ -29,9 +29,9 @@ var MammaMia = L.marker([42.65333057210587, 21.16757118455793]).bindPopup('Ketu 
 var italian = L.layerGroup([MammaMia, sette, ponte, la, trattoria, vapiano]);
 
 // Greek
-var trock = L.marker([42.66184666155505, 21.154231161087417]).bindPopup('Ketu eshte Trock Taverna.'),
-    baba = L.marker([42.65936927110693, 21.159702867145086]).bindPopup('Ketu eshte Baba Ganoush Meze.'),
-    gagi = L.marker([42.6635813816616, 21.162249957004892]).bindPopup('Ketu eshte Gagi Restaurant <br> .');
+var trock = L.marker([42.66184666155505, 21.154231161087417]).bindPopup('Ketu eshte Trock Taverna <br> Vleresimet 4.7 - 5 yje <br> Agon Gjonbalaj thot Absolutisht ushqimi më i mirë që kam shijuar ndonjëherë në një tavernë. Shije, shërbim dhe atmosferë fantastike. Shumë e rekomanduar!.'),
+    baba = L.marker([42.65936927110693, 21.159702867145086]).bindPopup('Ketu eshte Baba Ganoush Meze <br> Vleresimet 4.8 - 5  yje <br> Fisnik Namlixhiu thot Ushqimi është thjesht super i mirë. Gjithçka është e freskët, e shijshme dhe e bërë me kujdes të vërtetë. Por dip karrota e pjekur? Kjo është zhytja më e mirë që kam pasur ndonjëherë. Krem, pak i tymosur, pak i ëmbël, aq fjalë për fjalë perfekt.'),
+    gagi = L.marker([42.6635813816616, 21.162249957004892]).bindPopup('Ketu eshte Gagi Restaurant <br> Vleresimet 4.5 - 5 yje <br> Nita D thot Unë porosita pica Gagi, dhe ishte thjesht e mahnitshme! Si fillim, gjithashtu u kënaqa: shije të shijshme dhe produkte me freski të patëmetë. Stafi është mikpritës, i buzëqeshur dhe vërtet i vëmendshëm.');
 
 var greek = L.layerGroup([trock, baba, gagi]);
 
@@ -50,6 +50,14 @@ var mexicana = L.marker([42.661204234436234, 21.160461695577766]).bindPopup('Ket
 
 var mexican = L.layerGroup([mexicana, comandante, mucho]);
 
+// Steakhouse
+var lisa = L.marker([42.664316500225105, 21.159984141189742]).bindPopup('Ketu eshte Lisas Restaurant <br> Vleresimet 4.7 - 5 yje <br> Hasan Kllokoqi thot Lokacion shume i mire, ne qender te Prishtines. Shërbim shumë miqësor dhe i dobishëm që më bën shumë të lehtë zgjedhjen e vaktit. Ushqimi është i freskët dhe shumë i shijshëm.'),
+    master = L.marker([42.671125609524076, 21.194274462437463]).bindPopup('Ketu eshte Master Steakhouse <br> Vleresimet 4.6 - 5 yje <br> Besart Recani thot Sinqerisht, gjithçka rreth Masterit ishte në vend. Atmosfera ishte e stilit të lartë, por e ftohtë, ushqimi ishte i jashtëzakonshëm - një nga biftekët më të mirë që kam pasur ndonjëherë.'),
+    sarajeva = L.marker([42.66226208644534, 21.16218743268379]).bindPopup('Ketu eshte Sarajeva SteakHouse <br> Vleresimet 4.5 - 5 yje <br> Liridona G thot Vend shumë i bukur dhe elegant, staf i shkëlqyer dhe miqësor, si dhe ushqim fantastik!.');
+    freskia = L.marker([42.67221570018321, 21.219102968653218]).bindPopup('Ketu eshte Restaurant Freskia <br> Vleresimet 4.4 - 5 yje <br> Redon Ymeri thot vend i mrekullueshëm për të ardhur me familjen ia vlen dhe një natyrë dhe kafe vërtet e mrekullueshme është e mahnitshme.');
+    ramazzoti = L.marker([42.65035231967197, 21.158815662074307]).bindPopup('Ketu eshte Ramazzoti <br> Vleresimet 4.8 - 5 yje <br> Egzon Potoku thot E adhuroj këtë restorant! Çmimet janë perfekte, ushqimi është i shijshëm dhe stafi është jashtëzakonisht miqësor.');
+    vgermia = L.marker([42.669488244401435, 21.218743552276937]).bindPopup('Ketu eshte Vila Germia <br> Vleresimet 4.4 - 5 yje <br> Besnik Avdija thot Një nga restorantet më të mirë të vendosur në Prishtinë. Është 5 minuta me makinë nga qendra e qytetit ose 15 minuta me autobusin nr. 4. Me një pozicion të shkëlqyeshëm në fund të luginës së vogël të parkut të Gërmisë.');
+var steakhouse = L.layerGroup([lisa, master, sarajeva, freskia, ramazzoti, vgermia]);
 
 // Map layers
 var osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -80,12 +88,13 @@ var baseMaps = {
 };
 
 var overlayMaps = {
-    "Pizza": pizza,
-    "Hamburger": hamburger,
-    "Italian": italian,
-    "Greek": greek,
-    "Tradicionale": traditional,
-    "Meksikane": mexican,
+    "🍕Pizza": pizza,
+    "🍔Hamburger": hamburger,
+    "🍝Italian": italian,
+    "🥙Greek": greek,
+    "🍽️Tradicionale": traditional,
+    "🌮Meksikane": mexican,
+    "🥩Steakhouse": steakhouse
 };
 
  
