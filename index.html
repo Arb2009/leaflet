@@ -1,35 +1,196 @@
-<html lang="en">
+<!DOCTYPE html>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-    crossorigin=""/>
-     <!-- Make sure you put this AFTER Leaflet's CSS -->
- <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
- integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
- crossorigin=""></script>
- <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" />
-<link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
-<script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
-<script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+  <title>Leaflet Routing with Categories</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <!-- Leaflet Routing Machine CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css" />
 
- <style>
-    #map { height: 75em; }
- </style>
+  <style>
+    #map { height: 100vh; width: 100%; }
+    #categoryFilter {
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1000;
+      padding: 6px 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background: white;
+      cursor: pointer;
+    }
+    button {
+      margin-top: 5px;
+      padding: 4px 8px;
+      font-size: 13px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
-    <button onclick="goHome()">Go to Home</button>
+  <!-- Dropdown filter -->
+  <select id="categoryFilter">
+    <option value="all">Show All</option>
+  </select>
 
-<script>
-  function goHome() {
-    window.location.href = 'home.html'; // Change this to your home page URL
-  }
-</script>
-    <div id="map"></div> 
+  <div id="map"></div>
 
-    <script src="script.js"></script>
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <!-- Leaflet Routing Machine JS -->
+  <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
+
+  <script>
+    var map = L.map('map').setView([42.6754, 21.2110], 14);
+
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    var current_position, current_accuracy;
+    var routingControl = null;
+    let firstLocation = true;
+
+    // Categories with destinations
+    const categories = {
+      "🍕Pizza": [
+        { name: "Pizza Crust", lat: 42.65244897157923, lng: 21.17176212807544, desc: "Ketu eshte Pizza Crust <br> Vleresimet 4.5 - 5 yje <br> Ale S thot Restoranti i bukur ka shumë mundësi për pica, sanduiç, makarona dhe shumë ushqime të këndshme dhe të shijshme." },
+        { name: "Napoli Pizza", lat: 42.653479732786735, lng: 21.16771501628135, desc: "Ketu eshte Napoli Pizza <br> Vleresimet 4.5 - 5 yje <br>Anyle Zogu thot Një nga picabërësit më të mirë të Prishtinës. Kopshti i tyre është gjithashtu i bukur sidomos gjatë orës së artë." },
+        { name: "Jana", lat: 42.66308122788367, lng: 21.16771501628135, desc: "Ketu eshte Napoli Pizza <br> Vleresimet 4.5 - 5 yje <br>Anyle Zogu thot Një nga picabërësit më të mirë të Prishtinës. Kopshti i tyre është gjithashtu i bukur sidomos gjatë orës së artë." },
+      ],
+      "🍔Hamburger": [
+        { name: "Burger House", lat: 42.6622, lng: 21.1655, desc: "Juicy handmade burgers." },
+        { name: "Fast Burger", lat: 42.6615, lng: 21.1640, desc: "Quick and tasty." }
+      ],
+      "🍝Italian": [
+        { name: "Il Passatore", lat: 42.6605, lng: 21.1630, desc: "Authentic pasta and wine." }
+      ],
+      "🥙Greek": [
+        { name: "Gyros Spot", lat: 42.6599, lng: 21.1622, desc: "Delicious gyros wraps." }
+      ],
+      "🍽️Tradicionale": [
+        { name: "Taverna Prishtina", lat: 42.6588, lng: 21.1607, desc: "Traditional Kosovo food." }
+      ],
+      "🌮Meksikane": [
+        { name: "MexiCo", lat: 42.6577, lng: 21.1595, desc: "Tacos and burritos." }
+      ],
+      "🥩Steakhouse": [
+        { name: "Steak & Wine", lat: 42.6566, lng: 21.1580, desc: "Premium steaks and wine." }
+      ]
+    };
+
+    // Store markers by category
+    const categoryMarkers = {};
+
+    // Function to route to a clicked destination
+    function routeToDestination(destinationLatLng, destinationName) {
+      if (!current_position) {
+        alert("Your location is not detected yet!");
+        return;
+      }
+
+      // Remove previous route
+      if (routingControl) {
+        map.removeControl(routingControl);
+      }
+
+      routingControl = L.Routing.control({
+        waypoints: [
+          current_position.getLatLng(),
+          destinationLatLng
+        ],
+        routeWhileDragging: false,
+        showAlternatives: false,
+        draggableWaypoints: false,
+        addWaypoints: false
+      }).addTo(map);
+    }
+
+    // Place destination markers with popups
+    Object.entries(categories).forEach(([category, places]) => {
+      categoryMarkers[category] = [];
+
+      // Add category to dropdown
+      const option = document.createElement("option");
+      option.value = category;
+      option.textContent = category;
+      document.getElementById("categoryFilter").appendChild(option);
+
+      places.forEach(dest => {
+        const marker = L.marker([dest.lat, dest.lng]);
+
+        const popupContent = `
+          <b>${category} - ${dest.name}</b><br>
+          ${dest.desc}<br>
+          <button onclick="routeToDestination(L.latLng(${dest.lat}, ${dest.lng}), '${dest.name}')">
+            Route here
+          </button>
+        `;
+
+        marker.bindPopup(popupContent);
+        marker.addTo(map);
+
+        categoryMarkers[category].push(marker);
+      });
+    });
+
+    // Handle dropdown filter
+    document.getElementById("categoryFilter").addEventListener("change", function() {
+      const selected = this.value;
+
+      // Hide all markers first
+      Object.values(categoryMarkers).forEach(markers => {
+        markers.forEach(m => map.removeLayer(m));
+      });
+
+      // Show only selected category
+      if (selected === "all") {
+        Object.values(categoryMarkers).forEach(markers => {
+          markers.forEach(m => m.addTo(map));
+        });
+      } else {
+        categoryMarkers[selected].forEach(m => m.addTo(map));
+      }
+    });
+
+    // Handle user location
+    function onLocationFound(e) {
+      if (current_position) {
+        map.removeLayer(current_position);
+        map.removeLayer(current_accuracy);
+      }
+
+      var radius = e.accuracy / 2;
+
+      current_position = L.marker(e.latlng).addTo(map)
+        .bindPopup("You are here!").openPopup();
+
+      current_accuracy = L.circle(e.latlng, radius).addTo(map);
+
+      if (firstLocation) {
+        map.setView(e.latlng, 14);
+        firstLocation = false;
+      }
+    }
+
+    function onLocationError(e) {
+      alert(e.message);
+    }
+
+    map.on('locationfound', onLocationFound);
+    map.on('locationerror', onLocationError);
+
+    function locate() {
+      map.locate({setView: false, maxZoom: 14});
+    }
+
+    setInterval(locate, 3000); // Update location every 3 seconds
+  </script>
 </body>
 </html>
