@@ -14,7 +14,7 @@
 //     buffalo = L.marker([42.66121376069884, 21.16092697354637]).bindPopup('Ketu eshte Buffalo <br> Vleresimet 4.0 - 5 yje <br> Vlera S thot Burgerët më të mirë në qytet! I preferuari im është ai klasik amerikan! Gjithashtu serverët ishin super të bukur💕.'),
 //     smash = L.marker([42.65757062695122, 21.151709027685673]).bindPopup('Ketu eshte Smash Burger <br> Vleresimet 4.8 - 5 yje <br> Drenik Sadiku thot Burger dhe patate të skuqura ishin mjaft të mira, të kalitura dhe të gatuara në perfeksion. Shërbimi ishte shumë, pasi është ende një vend i ri, supozoj se punonjësit po mësohen me menunë e tyre të vogël dhe me përbërësit dhe salcat.'),
 //     shaban = L.marker([42.66328284322778, 21.163768238683343]).bindPopup('Ketu eshte Shaban Grill House <br> Vleresimet 4.5 - 5 yje <br> Genc Demjaha thot punëtorët janë vërtet të këndshëm dhe mishi ishte i mrekullueshëm. shërbimi ishte vërtet i shpejtë. një opsion vërtet i mirë për darkë.'),
-//     hebs = L.marker([42.6501059219779, 21.174256387127027]).bindPopup('Ketu eshte Hebs <br> Vleresimet 4.0 - 5 yje <br> Besian Beci thot Nese doni me u ngi me ushqim shko n hebs e kom ni eksperienc shume tmire me hebsin, ushqimi ka kualitet shum t lart porosia delivery vjen shum shpejt edhe asniher ushqimi sosht i ftoft.');
+//     hebs = L.marker([42.651026823391724, 21.174256387127027]).bindPopup('Ketu eshte Hebs <br> Vleresimet 4.0 - 5 yje <br> Besian Beci thot Nese doni me u ngi me ushqim shko n hebs e kom ni eksperienc shume tmire me hebsin, ushqimi ka kualitet shum t lart porosia delivery vjen shum shpejt edhe asniher ushqimi sosht i ftoft.');
 
 // var hamburger = L.layerGroup([Aba, routeKalabria, route66, buffalo, smash, shaban, hebs]);
 
